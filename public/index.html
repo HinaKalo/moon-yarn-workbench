@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer"><title>Moon Yarn 工作台</title>
+<link rel="stylesheet" href="/assets/style.css"><script src="/assets/app.js" type="module"></script>
+</head><body>
+<header class="mast">
+  <a class="wordmark" href="/">MOON / YARN</a>
+  <div class="toolbar">
+    <button id="new" type="button">新建脚本</button>
+    <button id="import" title="导入到当前草稿" type="button">导入</button>
+    <button id="download" type="button">下载</button>
+    <button id="save" class="primary" type="button" disabled>保存</button>
+    <form id="logout" action="/auth/logout" method="post" hidden><button type="submit">退出</button></form>
+    <input id="file" type="file" accept=".yarn,text/plain" hidden>
+  </div>
+</header>
+<main class="workbench">
+  <section class="editor-panel" aria-label="Yarn 脚本">
+    <div class="editor-head">
+      <select id="scripts" aria-label="切换脚本" disabled></select>
+      <input id="title" maxlength="100" aria-label="脚本名称" placeholder="脚本名称" disabled>
+      <button id="check" type="button" disabled>编译检查</button>
+    </div>
+    <div class="source">
+      <pre id="gutter" aria-hidden="true"></pre>
+      <textarea id="editor" aria-label="Yarn 源码" spellcheck="false" autocapitalize="off" wrap="off" maxlength="60000" disabled></textarea>
+    </div>
+    <section id="diagnostics" class="diagnostics" aria-label="编译诊断" hidden></section>
+  </section>
+  <section class="preview-panel" aria-labelledby="preview-title">
+    <div class="preview-head">
+      <h1 id="preview-title">运行预览</h1>
+      <div class="preview-controls">
+        <select id="start" aria-label="起始节点"><option value="Start">Start</option></select>
+        <button id="run" class="primary" type="button" disabled>运行</button>
+      </div>
+    </div>
+    <div id="transcript" class="transcript" aria-live="polite"><p class="empty">运行脚本后，可在这里选择剧情分支。</p></div>
+    <div id="options" class="options"></div>
+    <details id="variables" hidden><summary>变量</summary><dl id="values"></dl></details>
+  </section>
+</main>
+<footer class="footer"><span id="status" role="status">正在加载脚本…</span><span id="position"></span></footer>
+<dialog id="create"><form method="dialog">
+  <h2>新建 Yarn 脚本</h2><label>脚本名称<input id="new-title" maxlength="100" required autofocus></label>
+  <menu><button id="cancel" formnovalidate value="cancel">取消</button><button class="primary" value="submit">创建</button></menu>
+</form></dialog>
+</body></html>
